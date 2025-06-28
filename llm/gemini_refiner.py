@@ -23,22 +23,40 @@ def refine_results(query, df):
         df_slice = df[["Resource Name", "Channel Name", "Description", "Video Link"]].head(20)
         st.write("📜 Building prompt...")
         prompt = f"""
-Classify ONLY relevant YouTube coding resources below into meaningful learning categories like:
+You are a helpful learning assistant. Classify ONLY relevant YouTube coding resources below into meaningful learning categories such as:
 "For learning DSA", "For web development", "For DSA insights", "For DSA Motivation", "For DSA Strategy", etc.
-Come up with your own relevant categories too.
+You may create your own relevant categories as needed — all categories must be learning-oriented.
 
-Prioritize actual technical learning resources over motivational ones. Do not leave any category empty.
+🔹 Prioritize actual technical learning resources over motivational or opinion content.
+🔹 Do not leave any category empty.
+🔹 At least one or two resources must cover **subtopics related to the user's query** (e.g., if query is "DSA", subtopics could include recursion, trees, greedy, linked lists, etc.).
+🔹 For each resource, ensure the **description is grammatically correct and complete**, ideally around 2–3 lines long. Do NOT cut descriptions mid-sentence.
 
-Format:
+Return the final result strictly in the following JSON format (with no markdown, no commentary, no backticks):
 {{
-    "Category 1": [{{"Resource Name": "...", "Channel Name": "...", "Description": "...", "Video Link": "..."}}],
-    "Category 2": [{{...}}]
+  "Category 1": [
+    {{
+      "Resource Name": "...",
+      "Channel Name": "...",
+      "Description": "...",
+      "Video Link": "..."
+    }}
+  ],
+  "Category 2": [
+    {{
+      ...
+    }}
+  ]
 }}
 
-Use the title and channel to guess the topic if unclear. Keep the description informative (~3 lines). Do NOT include markdown or backticks, and don’t say anything else outside the JSON.
+Use the video title, description, and channel name to infer topics if unclear.
+
+Here are the resources to classify:
         
 {df_slice.to_string(index=False)}
-        """
+Do not write anything else, just give me the answer in json format as mentioned above. Do not act oversmart.
+"""
+
         st.write("🚀 Sending to Gemini...")
         # 🔁 Generate content
         response = model.generate_content(prompt)
