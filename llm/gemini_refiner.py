@@ -20,26 +20,44 @@ def refine_results(query, df):
         # Use top 20 results for refinement
         df_slice = df[["Resource Name", "Channel Name", "Description", "Video Link"]].head(20)
         prompt = f"""
-You are a helpful and smart educational video classifier assistant. A user is looking for resources related to: "{query}"  Classify ONLY relevant YouTube coding resources below into meaningful learning categories such as:
-"For learning DSA", "For web development", "For DSA insights", "For DSA Motivation", "For DSA Strategy", "Bonus Content", "Not related to topic, but useful", etc. according to the topic given.
-Also make category names related to what the topic input is given.
-You may create your own relevant categories as needed but do not give category names like "uncategorised", give it a proper name — most categories must be learning-oriented, one can be something like "For extra knowledge" or "Bonus Content".
+You are a helpful and smart educational video classifier assistant.
 
-🔹 Prioritize actual technical learning resources over motivational or opinion content.
-🔹 Do not leave any category empty.
-🔹 At least one or two resources must cover **subtopics related to the user's query** (e.g., if query is "DSA", subtopics could include recursion, trees, greedy, linked lists, etc.).
-🔹 For each resource, ensure the **description is grammatically correct and complete**, ideally around 2–3 lines long. Do NOT cut descriptions mid-sentence.
+A user is looking for resources related to: "{query}"
 
- SPECIAL RULE:
-If the user-entered topic "{query}" seems very unrelated to coding or computer science (e.g., topics like "banana", "dating", "football","balls"), do the following instead:
-- Make up funny but serious-looking unique educational category names about "{query}" and insert the same in "Resource Name" of JSON for example, if topic is Balls then make up categories like For Deep Balls insights, For Elite Ball Knowledge, etc...
-- In every "Video Link" field of the JSON, insert this exact link:
+Your job is to classify ONLY the **relevant YouTube coding resources** below into meaningful learning categories, such as:
+- "For learning DSA"
+- "For web development"
+- "For DSA insights"
+- "For DSA Motivation"
+- "For DSA Strategy"
+- "Bonus Content"
+- "Not related to topic, but useful"
+
+📌 You may also create your own relevant category names depending on the topic input, but:
+- Do NOT use generic labels like "Uncategorized"
+- Most categories should be **learning-oriented**
+- One category can be "Bonus Content" or "For extra knowledge"
+
+📌 Mandatory Guidelines:
+- ✅ Prioritize actual technical learning resources over motivational or opinion-based videos.
+- ✅ Do not leave any category empty.
+- ✅ At least 1–2 resources must cover **subtopics** of the main query. (E.g., for "DSA", subtopics might include recursion, trees, linked lists, etc.)
+- ✅ Ensure each **description is complete, grammatically correct, and ~2–3 lines long**. Do NOT cut mid-sentence.
+
+---
+
+🚨 SPECIAL RULE: If the input topic "{query}" is clearly **unrelated to computer science or coding** (e.g., "banana", "dating", "football", "balls"), then:
+- ❗Invent **funny but serious-sounding educational categories** about "{query}" (e.g., "For Elite Ball Knowledge", "Banana Algorithms", etc.)
+- ❗In every `"Video Link"` field, insert:
   "https://www.youtube.com/watch?v=dQw4w9WgXcQ&list=RDdQw4w9WgXcQ&start_radio=1"
-- Make up (not from the provided data) funny but serious looking unique youtube channel names, each channel should be different from the other (1 to 3 words long) related to "{query}" and insert that in every "Channel Name" field of the JSON.
-- Make up funny but serious looking unique description about "{query}" and insert that every "Description" field of the JSON.
-- Still follow the exact same JSON format below.
+- ❗Invent a **different, funny-but-convincing YouTube channel name** for each item (1–3 words, related to the query)
+- ❗Invent a **funny, serious-sounding video title and description** about "{query}" for each resource
+- ❗Still return output ONLY in the JSON format shown below — do not change the structure
 
-Return the final result strictly in the following JSON format (with no markdown, no commentary, no backticks):
+---
+
+📦 Return your final answer STRICTLY in this format (no markdown, no explanations, no commentary):
+
 {{
   "Category 1": [
     {{
@@ -56,13 +74,17 @@ Return the final result strictly in the following JSON format (with no markdown,
   ]
 }}
 
-Use the video title, description, and channel name to infer topics if unclear.
+Use the title, description, and channel to infer the topic if unclear.
+
+---
 
 Here are the resources to classify:
-        
+
 {df_slice.to_string(index=False)}
-Do not write anything else, just give me the answer in json format as mentioned above. Do not act oversmart.
+
+⚠️ Output ONLY valid JSON. Do not include anything else. Do not try to be clever.
 """
+
         # 🔁 Generate content
         response = model.generate_content(prompt)
         cleaned = response.text.strip()
