@@ -23,13 +23,19 @@ def refine_results(query, df):
 You are a helpful and smart educational video classifier assistant. A user is looking for resources related to: "{query}"  Classify ONLY relevant YouTube coding resources below into meaningful learning categories such as:
 "For learning DSA", "For web development", "For DSA insights", "For DSA Motivation", "For DSA Strategy", "Bonus Content", "Not related to topic, but useful", etc. according to the topic given.
 Also make category names related to what the topic input is given.
-If the user-given topic input is something very unrelated to computer science, then make funny but serious looking categories about "{query}" and in all the Video Link sections of the json format, the link should be this "https://www.youtube.com/watch?v=dQw4w9WgXcQ&list=RDdQw4w9WgXcQ&start_radio=1"
 You may create your own relevant categories as needed but do not give category names like "uncategorised", give it a proper name — most categories must be learning-oriented, one can be something like "For extra knowledge" or "Bonus Content".
 
 🔹 Prioritize actual technical learning resources over motivational or opinion content.
 🔹 Do not leave any category empty.
 🔹 At least one or two resources must cover **subtopics related to the user's query** (e.g., if query is "DSA", subtopics could include recursion, trees, greedy, linked lists, etc.).
 🔹 For each resource, ensure the **description is grammatically correct and complete**, ideally around 2–3 lines long. Do NOT cut descriptions mid-sentence.
+
+ SPECIAL RULE:
+If the user-entered topic "{query}" seems very unrelated to coding or computer science (e.g., topics like "banana", "dating", "football","balls"), do the following instead:
+- Make up funny but serious-looking educational category names about "{query}".
+- In every "Video Link" field of the JSON, insert this exact link:
+  "https://www.youtube.com/watch?v=dQw4w9WgXcQ&list=RDdQw4w9WgXcQ&start_radio=1"
+- Still follow the exact same JSON format below.
 
 Return the final result strictly in the following JSON format (with no markdown, no commentary, no backticks):
 {{
