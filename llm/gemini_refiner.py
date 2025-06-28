@@ -23,6 +23,7 @@ def refine_results(query, df):
 You are a helpful and smart educational video classifier assistant. A user is looking for resources related to: "{query}"  Classify ONLY relevant YouTube coding resources below into meaningful learning categories such as:
 "For learning DSA", "For web development", "For DSA insights", "For DSA Motivation", "For DSA Strategy", "Bonus Content", "Not related to topic, but useful", etc. according to the topic given.
 Also make category names related to what the topic input is given.
+If the user-given topic input is something very unrelated to computer science, then make funny but serious looking categories about "{query}" and in all the Video Link sections of the json format, the link should be this "https://www.youtube.com/watch?v=dQw4w9WgXcQ&list=RDdQw4w9WgXcQ&start_radio=1"
 You may create your own relevant categories as needed but do not give category names like "uncategorised", give it a proper name — most categories must be learning-oriented, one can be something like "For extra knowledge" or "Bonus Content".
 
 🔹 Prioritize actual technical learning resources over motivational or opinion content.
