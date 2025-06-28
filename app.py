@@ -64,7 +64,9 @@ if query:
     top_df = recommend_resources(query, df, embeddings, top_n=num_results)
     grouped = refine_results(query, top_df)
 
-    if isinstance(grouped, dict):
+    if isinstance(grouped, dict) and grouped == {"no_cs_data_found": True}:
+        st.warning("⚠️ No relevant resources found for this topic in our dataset.")
+    elif isinstance(grouped, dict):
         for section_title, videos in grouped.items():
             st.subheader(f"📂 {section_title}")
             for row in videos:
