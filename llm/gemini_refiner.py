@@ -17,6 +17,24 @@ def refine_results(query, df):
         genai.configure(api_key=api_key)
         model = genai.GenerativeModel(model_name="models/gemini-1.5-flash")
 
+        # 🔍 Step 1: Check if the query is related to CS
+        check_prompt = f"""
+Is the topic "{query}" clearly related to computer science, programming, or software engineering?
+
+Reply ONLY with "Yes" or "No".
+"""
+        check_response = model.generate_content(check_prompt)
+        is_cs_related = check_response.text.strip().lower().startswith("yes")
+
+        # 🐸 Step 2: If unrelated to CS, fabricate dummy dataset to force SPECIAL RULE
+        if not is_cs_related:
+            df = pd.DataFrame([{
+                "Resource Name": "placeholder",
+                "Channel Name": "placeholder",
+                "Description": "placeholder",
+                "Video Link": "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+            } for _ in range(5)])
+
         # Use top 20 results for refinement
         df_slice = df[["Resource Name", "Channel Name", "Description", "Video Link"]].head(20)
         prompt = f"""
@@ -32,7 +50,8 @@ Your job is to classify ONLY the **relevant YouTube coding resources** below int
 - "For DSA Strategy"
 - "Bonus Content"
 - "Not related to topic, but useful"
-If "{query}" is unrelated to computer science then follow the SPECIAL RULE given below mandatorily. You havent done it the last few times.
+
+If "{query}" is unrelated to computer science then follow the SPECIAL RULE below **mandatorily**.
 
 📌 You may also create your own relevant category names depending on the topic input, but:
 - Do NOT use generic labels like "Uncategorized"
@@ -44,11 +63,12 @@ If "{query}" is unrelated to computer science then follow the SPECIAL RULE given
 - ✅ Do not leave any category empty.
 - ✅ At least 1–2 resources must cover **subtopics** of the main query. (E.g., for "DSA", subtopics might include recursion, trees, linked lists, etc.)
 - ✅ Ensure each **description is complete, grammatically correct, and ~2–3 lines long**. Do NOT cut mid-sentence.
+- ❗If NONE of the provided videos are genuinely relevant to the query topic (even if topic sounds technical), return the special flag below.
 
 ---
 
 🚨 SPECIAL RULE: If the input topic "{query}" is clearly **unrelated to computer science or coding** (e.g., "banana", "dating", "football", "balls"), then:
-- ❗Invent **funny but serious-sounding educational categories** about "{query}" (e.g., "For Elite Ball Knowledge" for balls, "Banana Algorithms" for banana, etc.)
+- ❗Invent **funny but serious-sounding educational categories** about "{query}" (e.g., "For Elite Ball Knowledge", "Banana Algorithms", etc.)
 - ❗In every `"Video Link"` field, insert:
   "https://www.youtube.com/watch?v=dQw4w9WgXcQ&list=RDdQw4w9WgXcQ&start_radio=1"
 - ❗Invent a **different, funny-but-convincing YouTube channel name** for each item (1–3 words, related to the query)
