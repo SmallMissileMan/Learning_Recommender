@@ -32,9 +32,11 @@ You may create your own relevant categories as needed but do not give category n
 
  SPECIAL RULE:
 If the user-entered topic "{query}" seems very unrelated to coding or computer science (e.g., topics like "banana", "dating", "football","balls"), do the following instead:
-- Make up funny but serious-looking educational category names about "{query}".
+- Make up funny but serious-looking unique educational category names about "{query}" and insert the same in "Resource Name" of JSON for example, if topic is Balls then make up categories like For Deep Balls insights, For Elite Ball Knowledge, etc...
 - In every "Video Link" field of the JSON, insert this exact link:
   "https://www.youtube.com/watch?v=dQw4w9WgXcQ&list=RDdQw4w9WgXcQ&start_radio=1"
+- Make up funny but serious looking unique youtube channel names and insert that in every "Channel Name" field of the JSON.
+- Make up funny but serious looking unique description about "{query}" and insert that every "Description" field of the JSON.
 - Still follow the exact same JSON format below.
 
 Return the final result strictly in the following JSON format (with no markdown, no commentary, no backticks):
