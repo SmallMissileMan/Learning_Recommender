@@ -32,7 +32,7 @@ Your job is to classify ONLY the **relevant YouTube coding resources** below int
 - "For DSA Strategy"
 - "Bonus Content"
 - "Not related to topic, but useful"
-If topic is unrelated to computer science then follow the SPECIAL RULE given below mandatorily. You havent done it the last few times.
+If "{query}" is unrelated to computer science then follow the SPECIAL RULE given below mandatorily. You havent done it the last few times.
 
 📌 You may also create your own relevant category names depending on the topic input, but:
 - Do NOT use generic labels like "Uncategorized"
@@ -48,7 +48,7 @@ If topic is unrelated to computer science then follow the SPECIAL RULE given bel
 ---
 
 🚨 SPECIAL RULE: If the input topic "{query}" is clearly **unrelated to computer science or coding** (e.g., "banana", "dating", "football", "balls"), then:
-- ❗Invent **funny but serious-sounding educational categories** about "{query}" (e.g., "For Elite Ball Knowledge", "Banana Algorithms", etc.)
+- ❗Invent **funny but serious-sounding educational categories** about "{query}" (e.g., "For Elite Ball Knowledge" for balls, "Banana Algorithms" for banana, etc.)
 - ❗In every `"Video Link"` field, insert:
   "https://www.youtube.com/watch?v=dQw4w9WgXcQ&list=RDdQw4w9WgXcQ&start_radio=1"
 - ❗Invent a **different, funny-but-convincing YouTube channel name** for each item (1–3 words, related to the query)
@@ -57,7 +57,7 @@ If topic is unrelated to computer science then follow the SPECIAL RULE given bel
 
 ---
 
-🚫 If you believe **none of the resources are truly related to coding or computer science** (even though the topic may sound technical), just return this exactly:
+🚫 If you believe **none of the resources are truly related to coding or computer science** (even though the "{query}" may sound technical), just return this exactly:
 {{ "no_cs_data_found": true }}
 
 ---
