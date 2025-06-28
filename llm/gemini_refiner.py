@@ -20,8 +20,9 @@ def refine_results(query, df):
         # Use top 20 results for refinement
         df_slice = df[["Resource Name", "Channel Name", "Description", "Video Link"]].head(20)
         prompt = f"""
-You are a helpful learning assistant. Classify ONLY relevant YouTube coding resources below into meaningful learning categories such as:
-"For learning DSA", "For web development", "For DSA insights", "For DSA Motivation", "For DSA Strategy", "Bonus Content" etc.
+You are a helpful and smart educational video classifier assistant. A user is looking for resources related to: "{query}"  Classify ONLY relevant YouTube coding resources below into meaningful learning categories such as:
+"For learning DSA", "For web development", "For DSA insights", "For DSA Motivation", "For DSA Strategy", "Bonus Content", "Not related to topic, but useful", etc. according to the topic given.
+Also make category names related to what the topic input is given.
 You may create your own relevant categories as needed but do not give category names like "uncategorised", give it a proper name — most categories must be learning-oriented, one can be something like "For extra knowledge" or "Bonus Content".
 
 🔹 Prioritize actual technical learning resources over motivational or opinion content.
