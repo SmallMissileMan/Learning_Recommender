@@ -57,6 +57,11 @@ If topic is unrelated to computer science then follow SPECIAL RULE.
 
 ---
 
+🚫 If you believe **none of the resources are truly related to coding or computer science** (even though the topic may sound technical), just return this exactly:
+{{ "no_cs_data_found": true }}
+
+---
+
 📦 Return your final answer STRICTLY in this format (no markdown, no explanations, no commentary):
 
 {{
@@ -97,7 +102,16 @@ Here are the resources to classify:
             cleaned = cleaned[3:]
         if cleaned.endswith("```"):
             cleaned = cleaned[:-3]
+
         parsed = json.loads(cleaned)
+
+        # ✅ Check if Gemini returned flag or empty categories
+        if isinstance(parsed, dict):
+            if "no_cs_data_found" in parsed:
+                return {"no_cs_data_found": True}
+            if all(isinstance(v, list) and len(v) == 0 for v in parsed.values()):
+                return {"no_cs_data_found": True}
+
         return parsed
 
     except Exception as e:
