@@ -10,7 +10,6 @@ api_key = st.secrets.get("GEMINI_API_KEY") or os.getenv("GEMINI_API_KEY")
 # ✅ Gemini-based result refinement
 def refine_results(query, df):
     try:
-        st.write("🔧 Starting Gemini refinement...")  # ✅ Start log
         if not api_key:
             st.warning("⚠️ Gemini API key not found. Showing default recommendations.")
             return df  # fallback
@@ -19,9 +18,7 @@ def refine_results(query, df):
         model = genai.GenerativeModel(model_name="models/gemini-1.5-flash")
 
         # Use top 20 results for refinement
-        st.write("📊 Preparing top 20 results...")
         df_slice = df[["Resource Name", "Channel Name", "Description", "Video Link"]].head(20)
-        st.write("📜 Building prompt...")
         prompt = f"""
 You are a helpful learning assistant. Classify ONLY relevant YouTube coding resources below into meaningful learning categories such as:
 "For learning DSA", "For web development", "For DSA insights", "For DSA Motivation", "For DSA Strategy", etc.
@@ -56,12 +53,9 @@ Here are the resources to classify:
 {df_slice.to_string(index=False)}
 Do not write anything else, just give me the answer in json format as mentioned above. Do not act oversmart.
 """
-
-        st.write("🚀 Sending to Gemini...")
         # 🔁 Generate content
         response = model.generate_content(prompt)
         cleaned = response.text.strip()
-        st.write("✅ Gemini response received.")
 
         # ✅ Sanitize output
         if cleaned.startswith("```json"):
@@ -71,7 +65,6 @@ Do not write anything else, just give me the answer in json format as mentioned 
         if cleaned.endswith("```"):
             cleaned = cleaned[:-3]
         parsed = json.loads(cleaned)
-        st.write("📦 Parsed JSON categories:", list(parsed.keys()))
         return parsed
 
     except Exception as e:
