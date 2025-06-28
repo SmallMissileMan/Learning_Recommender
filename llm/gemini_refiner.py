@@ -35,7 +35,7 @@ If the user-entered topic "{query}" seems very unrelated to coding or computer s
 - Make up funny but serious-looking unique educational category names about "{query}" and insert the same in "Resource Name" of JSON for example, if topic is Balls then make up categories like For Deep Balls insights, For Elite Ball Knowledge, etc...
 - In every "Video Link" field of the JSON, insert this exact link:
   "https://www.youtube.com/watch?v=dQw4w9WgXcQ&list=RDdQw4w9WgXcQ&start_radio=1"
-- Make up funny but serious looking unique youtube channel names and insert that in every "Channel Name" field of the JSON.
+- Make up (not from the provided data) funny but serious looking unique youtube channel names related to "{query}" and insert that in every "Channel Name" field of the JSON.
 - Make up funny but serious looking unique description about "{query}" and insert that every "Description" field of the JSON.
 - Still follow the exact same JSON format below.
 
