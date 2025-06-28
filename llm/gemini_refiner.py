@@ -32,6 +32,7 @@ Your job is to classify ONLY the **relevant YouTube coding resources** below int
 - "For DSA Strategy"
 - "Bonus Content"
 - "Not related to topic, but useful"
+If topic is unrelated to computer science then follow SPECIAL RULE.
 
 📌 You may also create your own relevant category names depending on the topic input, but:
 - Do NOT use generic labels like "Uncategorized"
