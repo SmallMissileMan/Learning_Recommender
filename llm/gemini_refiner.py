@@ -106,7 +106,7 @@ Use the title, description, and channel to infer the topic if unclear.
 
 Here are the resources to classify:
 
-{df_slice.to_string(index=False)}
+{df_slice.to_json(orient="records", indent=2)}
 
 ⚠️ Output ONLY valid JSON. Do not include anything else. Do not try to be clever.
 """
