@@ -135,12 +135,31 @@ Here are the resources to classify:
 
         parsed = json.loads(cleaned)
 
-        # ✅ Check if Gemini returned flag or empty categories
+        # ✅ Post-filter to drop invalid categories
+        def is_valid_resource(item):
+            return (
+                isinstance(item.get("Resource Name"), str) and item["Resource Name"].strip() and
+                isinstance(item.get("Channel Name"), str) and item["Channel Name"].strip() and
+                isinstance(item.get("Description"), str) and 
+                len(item["Description"].split()) >= 6 and 
+                not item["Description"].strip().endswith("...") and
+                "youtube.com/watch" in item.get("Video Link", "")
+            )
+
         if isinstance(parsed, dict):
             if "no_cs_data_found" in parsed:
                 return {"no_cs_data_found": True}
-            if all(isinstance(v, list) and len(v) == 0 for v in parsed.values()):
+
+            cleaned_parsed = {}
+            for category, items in parsed.items():
+                if isinstance(items, list):
+                    valid_items = [item for item in items if is_valid_resource(item)]
+                    if valid_items:
+                        cleaned_parsed[category] = valid_items
+
+            if not cleaned_parsed:
                 return {"no_cs_data_found": True}
+            parsed = cleaned_parsed
 
         return parsed
 
