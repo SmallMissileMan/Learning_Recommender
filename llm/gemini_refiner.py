@@ -42,49 +42,57 @@ You are a helpful and smart educational video classifier assistant.
 
 A user is looking for resources related to: "{query}"
 
-Your job is to classify ONLY the **relevant YouTube coding resources** below into meaningful learning categories, such as but not limited to:
+Your job is to classify ONLY the **relevant YouTube coding resources** below into clear, meaningful learning categories. Examples include (but are not limited to):
 - "For learning DSA"
 - "For web development"
 - "For DSA insights"
-- "For DSA Motivation"
-- "For DSA Strategy"
+- "For DSA motivation"
 - "Bonus Content"
 - "Not related to topic, but useful"
 
-Every learning category should mandatorily have a resource name, channel name, description, video link. Otherwise do not make that category. Response should be extremely user friendly.
+📌 VERY IMPORTANT:
 
-If "{query}" is unrelated to computer science then follow the SPECIAL RULE below **mandatorily**.
+❗You MUST follow these rules:
+- ❌ Do NOT create a category if even a single resource inside it is missing any of these:
+  - `Resource Name`
+  - `Channel Name`
+  - `Description` (must be 2–3 lines, grammatically correct, and **must NOT end with '...'**)
+  - `Video Link` (must be a valid YouTube link)
+- ✅ Only include categories that contain **only valid items** as above.
+- ✅ Do NOT truncate any field.
+- ✅ Do NOT leave any category empty.
+- ✅ Drop the entire category if even one item inside it is invalid or incomplete.
 
-📌 You may also create your own relevant category names depending on the topic input, but:
-- Do NOT use generic labels like "Uncategorized"
-- Most categories should be **learning-oriented**
-- One category can be "Bonus Content" or "For extra knowledge"
+🎯 Your goal is to give a very **user-friendly**, **organized**, and **refined** classification that feels human-curated. Do NOT be lazy.
 
-📌 Mandatory Guidelines:
-- ✅ Prioritize actual technical learning resources over motivational or opinion-based videos.
-- ✅ Do not leave any category empty.
-- ✅ At least 1–2 resources must cover **subtopics** of the main query. (E.g., for "DSA", subtopics might include recursion, trees, linked lists, etc.)
-- ✅ Ensure each **description is complete, grammatically correct, and ~2–3 lines long**. Do NOT cut mid-sentence.
-- ❗If NONE of the provided videos are genuinely relevant to the query topic (even if topic sounds technical), return the special flag below.
+📌 You may invent your own smart category names depending on the input, but:
+- Do NOT use vague labels like "Uncategorized"
+- Most categories should be **learning-focused**
+- One category can be "Bonus Content" or "Extra Insight"
+
+📌 Technical Guidelines:
+- ✅ Prioritize learning/educational content over motivational or commentary videos.
+- ✅ Include subtopics if possible. E.g., if topic is "DSA", include resources on recursion, trees, sorting, etc.
+- ✅ Never include clickbait or joke videos unless query is non-CS.
 
 ---
 
-🚨 SPECIAL RULE: If the input topic "{query}" is clearly **unrelated to computer science or coding** (e.g., "banana", "dating", "football", "balls"), then:
-- ❗Invent **funny but serious-sounding educational categories** about "{query}" (e.g., "For Elite Ball Knowledge", "Banana Algorithms", etc.)
-- ❗In every `"Video Link"` field, insert:
+🚨 SPECIAL RULE: If the input topic "{query}" is clearly **not related to computer science or coding** (e.g., "banana", "football", "balls"):
+- ❗Create fake but serious-sounding educational categories (e.g., "Banana Algorithms", "Ball Theory")
+- ❗Make up funny but believable channel names (e.g., "Fruit Tech", "Playball Weekly")
+- ❗Use this exact YouTube link for every result:
   "https://www.youtube.com/watch?v=dQw4w9WgXcQ&list=RDdQw4w9WgXcQ&start_radio=1"
-- ❗Invent a **different, funny-but-convincing YouTube channel name** for each item (1–3 words, related to the query)
-- ❗Invent a **funny, serious-sounding video title and description** about "{query}" for each resource
-- ❗Still return output ONLY in the JSON format shown below — do not change the structure
+- ❗Fabricate a detailed, quirky-but-plausible description for each item (~2–3 lines, grammatically correct)
+- ❗Still return ONLY valid JSON. No markdown, no explanation.
 
 ---
 
-🚫 If you believe **none of the resources are truly related to coding or computer science** (even though the "{query}" may sound technical), just return this exactly:
+🚫 If you determine that NONE of the resources are truly relevant to coding or computer science, even if the topic seems technical, return this JSON exactly:
 {{ "no_cs_data_found": true }}
 
 ---
 
-📦 Return your final answer STRICTLY in this format (no markdown, no explanations, no commentary):
+📦 Output your final response in this **strict JSON format** (NO markdown, NO text, NO prefix, NO suffix):
 
 {{
   "Category 1": [
@@ -102,7 +110,7 @@ If "{query}" is unrelated to computer science then follow the SPECIAL RULE below
   ]
 }}
 
-Use the title, description, and channel to infer the topic if unclear.
+Use title, description, and channel to infer the video’s topic. Be strict.
 
 ---
 
@@ -110,7 +118,7 @@ Here are the resources to classify:
 
 {df_slice.to_json(orient="records", indent=2)}
 
-⚠️ Output ONLY valid JSON. Do not include anything else. Do not try to be clever.
+⚠️ Output **ONLY valid JSON**. Nothing else. Do not try to be clever.
 """
 
         # 🔁 Generate content
