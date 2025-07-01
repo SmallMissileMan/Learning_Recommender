@@ -67,12 +67,14 @@ Gemini API Key
 Streamlit
 
 Installation:- 
+
 git clone https://github.com/yourusername/smart-coding-recommender.git  
 cd smart-coding-recommender  
 pip install -r requirements.txt  
 streamlit run app.py
 
 Optional:-
+
 python precompute_embeddings.py     # Pre-generate video embeddings
 
 🔐 Environment Setup:-
