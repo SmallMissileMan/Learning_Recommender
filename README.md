@@ -54,30 +54,28 @@ User inputs a query → it's embedded using sentence-transformers
 → Gemini LLM filters & classifies those results
 → Streamlit displays only the highest quality ones
 
-✅ Example Prompts:-
+✅ Example Prompts:-  
 Learn recursion and backtracking
 Best YouTube videos for Java roadmap
 Understand Computer Networks visually
 Frontend roadmap 2024
 Quick DBMS revision videos
 
-Prerequisites:- 
+Prerequisites:-   
 Python 3.8+
 Gemini API Key
 Streamlit
 
-Installation:- 
-
+Installation:-  
 git clone https://github.com/yourusername/smart-coding-recommender.git  
 cd smart-coding-recommender  
 pip install -r requirements.txt  
 streamlit run app.py
 
-Optional:-
-
+Optional:-  
 python precompute_embeddings.py     # Pre-generate video embeddings
 
-🔐 Environment Setup:-
+🔐 Environment Setup:-  
 Create a .env file and add:
 GEMINI_API_KEY=your-secret-api-key
 
