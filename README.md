@@ -33,20 +33,20 @@ google-generativeai (Gemini API)
 dotenv  
 
 📁 Project Structure:-  
-smart-coding-recommender/
-├── dataset/
-│   └── learning_resources.csv          # Cleaned YouTube metadata
-├── llm/
-│   └── gemini_refiner.py               # Gemini LLM filtering & tagging
-├── ml/
-│   └── model.py                        # Embedding + cosine similarity logic
-├── scraping/
-│   └── scraper.py                      # (Optional) YouTube data scraper
-├── app.py                              # Main Streamlit frontend
-├── precompute_embeddings.py            # One-time embedding generator
-├── requirements.txt                    # Python dependencies
-├── packages.txt                        # For Streamlit Cloud compatibility
-└── .gitignore                          # Hides .env, cache, etc.
+smart-coding-recommender/  
+├── dataset/  
+│   └── learning_resources.csv          # Cleaned YouTube metadata  
+├── llm/  
+│   └── gemini_refiner.py               # Gemini LLM filtering & tagging  
+├── ml/  
+│   └── model.py                        # Embedding + cosine similarity logic  
+├── scraping/  
+│   └── scraper.py                      # (Optional) YouTube data scraper  
+├── app.py                              # Main Streamlit frontend  
+├── precompute_embeddings.py            # One-time embedding generator  
+├── requirements.txt                    # Python dependencies  
+├── packages.txt                        # For Streamlit Cloud compatibility  
+└── .gitignore                          # Hides .env, cache, etc.  
 
 🧠 How It Works:-  
 User inputs a query → it's embedded using sentence-transformers
@@ -73,7 +73,7 @@ pip install -r requirements.txt
 streamlit run app.py
 
 Optional:-  
-python precompute_embeddings.py     # Pre-generate video embeddings
+python precompute_embeddings.py      # Pre-generate video embeddings
 
 🔐 Environment Setup:-  
 Create a .env file and add:  
