@@ -48,7 +48,7 @@ smart-coding-recommender/
 ├── packages.txt                        # For Streamlit Cloud compatibility
 └── .gitignore                          # Hides .env, cache, etc.
 
-🧠 How It Works:-
+🧠 How It Works:-  
 User inputs a query → it's embedded using sentence-transformers
 → Top 20 semantically similar video descriptions are retrieved
 → Gemini LLM filters & classifies those results
