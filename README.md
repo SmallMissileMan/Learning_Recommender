@@ -30,7 +30,7 @@ A next-gen coding content engine that combines **semantic understanding** and **
 
 13. Fast, scrollable UI with clickable YouTube links  
 
-14. Each card shows title, tags, and brief summary   
+14. Each card shows title, tags, and brief summary     
 
 🛠️ Tech Stack:-  
 Python  
