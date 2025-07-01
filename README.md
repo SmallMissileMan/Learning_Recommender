@@ -9,20 +9,20 @@ Matches your query meaningfully using cosine similarity
 🤖 Gemini LLM Refinement
 
 Filters out low-quality or irrelevant results  
-Categorizes videos like:  
+Categorizes videos like:-  
 • For learning DSA  
 • For brushing up fundamentals  
 • For advanced learners  
 🎛️ Dynamic Output Control
 
-User can choose between 1 to 10 results  
+User can choose between 1 to 10 results 
 Fallback message if not enough high-quality matches found  
 🖼️ Streamlit Interface
 
 Fast, scrollable UI with clickable YouTube links  
 Each card shows title, tags, and brief summary  
 
-🛠️ Tech Stack  
+🛠️ Tech Stack:-  
 Python  
 Streamlit  
 pandas  
@@ -32,7 +32,7 @@ sentence-transformers
 google-generativeai (Gemini API)  
 dotenv  
 
-📁 Project Structure  
+📁 Project Structure:-  
 smart-coding-recommender/
 ├── dataset/
 │   └── learning_resources.csv          # Cleaned YouTube metadata
@@ -48,38 +48,38 @@ smart-coding-recommender/
 ├── packages.txt                        # For Streamlit Cloud compatibility
 └── .gitignore                          # Hides .env, cache, etc.
 
-🧠 How It Works
+🧠 How It Works:-
 User inputs a query → it's embedded using sentence-transformers
 → Top 20 semantically similar video descriptions are retrieved
 → Gemini LLM filters & classifies those results
 → Streamlit displays only the highest quality ones
 
-✅ Example Prompts
+✅ Example Prompts:-
 Learn recursion and backtracking
 Best YouTube videos for Java roadmap
 Understand Computer Networks visually
 Frontend roadmap 2024
 Quick DBMS revision videos
 
-Prerequisites
+Prerequisites:- 
 Python 3.8+
 Gemini API Key
 Streamlit
 
-Installation
+Installation:- 
 git clone https://github.com/yourusername/smart-coding-recommender.git  
 cd smart-coding-recommender  
 pip install -r requirements.txt  
 streamlit run app.py
 
-Optional
+Optional:-
 python precompute_embeddings.py     # Pre-generate video embeddings
 
-🔐 Environment Setup
+🔐 Environment Setup:-
 Create a .env file and add:
 GEMINI_API_KEY=your-secret-api-key
 
-🧑‍💻 Author
+🧑‍💻 Author:-
 Aaryan Madhu
 MIT Manipal | CCE
 Smarter tools for self-learners, no fluff just signal 🔥
