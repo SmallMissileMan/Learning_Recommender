@@ -76,10 +76,10 @@ Optional:-
 python precompute_embeddings.py     # Pre-generate video embeddings
 
 🔐 Environment Setup:-  
-Create a .env file and add:
-GEMINI_API_KEY=your-secret-api-key
+Create a .env file and add:  
+GEMINI_API_KEY=your-secret-api-key  
 
 🧑‍💻 Author:-  
-Aaryan Madhu
-MIT Manipal | CCE
+Aaryan Madhu  
+MIT Manipal | CCE  
 Smarter tools for self-learners, no fluff just signal 🔥
