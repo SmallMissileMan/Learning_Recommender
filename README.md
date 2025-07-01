@@ -1,26 +1,36 @@
 💡 Smart Coding Video Recommender  
-A next-gen coding content engine that combines **semantic understanding** and **LLM reasoning** to recommend the highest-quality YouTube learning videos. Uses sentence-transformers for similarity and Gemini to refine, clean, and classify your results. Streamlined. Smart. Stupid fast.
+A next-gen coding content engine that combines **semantic understanding** and **LLM reasoning** to recommend the highest-quality YouTube learning videos. Uses sentence-transformers for similarity and Gemini to refine, clean, and classify your results. Streamlined. Smart. Stupid fast.  
 
 🔍 Features:  
-🧠 Sentence-Transformer Based Semantic Search
+1. Sentence-Transformer Based Semantic Search  
 
-Embeds video descriptions using `all-MiniLM-L6-v2`  
-Matches your query meaningfully using cosine similarity  
-🤖 Gemini LLM Refinement  
+2. Embeds video descriptions using `all-MiniLM-L6-v2`  
 
-Filters out low-quality or irrelevant results  
-Categorizes videos like:-  
-• For learning DSA  
-• For brushing up fundamentals  
-• For advanced learners  
-🎛️ Dynamic Output Control  
+3. Matches your query meaningfully using cosine similarity  
 
-User can choose between 1 to 10 results  
-Fallback message if not enough high-quality matches found   
-🖼️ Streamlit Interface  
+4. Gemini LLM Refinement  
 
-Fast, scrollable UI with clickable YouTube links  
-Each card shows title, tags, and brief summary  
+5. Filters out low-quality or irrelevant results  
+
+6. Categorizes videos like:-  
+    • For learning DSA  
+    • For brushing up fundamentals  
+    • For advanced learners  
+
+7. Dynamic Output Control   
+
+8. User can choose between 1 to 10 results  
+
+9. Fallback message if not enough high-quality matches found
+
+10. If user enters troll inputs like `banana`, `balls`, or `nonsense`, the app **Rickrolls them instantly** with a direct video link 💀
+    Built-in humor module powered by ✨ memetic engineering™  
+
+12. Streamlit Interface  
+
+13. Fast, scrollable UI with clickable YouTube links  
+
+14. Each card shows title, tags, and brief summary   
 
 🛠️ Tech Stack:-  
 Python  
